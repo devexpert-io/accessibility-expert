@@ -24,4 +24,7 @@
     <string name="cd_settings_button">Go to Settings</string>
     <string name="cd_profile_button">Go to Profile</string>
     
+    <!-- Accessibility Service -->
+    <string name="accessibility_service_description">Logs accessibility events to help developers understand how accessibility works</string>
+    
 </resources>

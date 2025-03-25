@@ -1,3 +1,22 @@
 <resources>
     <string name="app_name">Accessibility Expert</string>
+    
+    <!-- General Strings -->
+    <string name="playground">Playground (Start Here)</string>
+    <string name="solution">Solution</string>
+    <string name="choose_option">Choose an option:</string>
+    <string name="classic_views_title">Classic Views Exercises</string>
+    <string name="exercise1_title">1. Content Description for Images</string>
+
+    <!-- Main Activity -->
+    <string name="main_title">Android Accessibility</string>
+    <string name="choose_platform">Choose your UI platform</string>
+    <string name="classic_views_button">Classic Views</string>
+    <string name="compose_button">Jetpack Compose (Coming Soon)</string>
+    
+    <!-- Toast Messages -->
+    <string name="home_clicked">Home clicked</string>
+    <string name="settings_clicked">Settings clicked</string>
+    <string name="profile_clicked">Profile clicked</string>
+    
 </resources>

@@ -12,17 +12,30 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AccessibilityExpert"
         tools:targetApi="31">
+        
+        <!-- Main Dashboard Activity -->
         <activity
             android:name=".MainActivity"
-            android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.AccessibilityExpert">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
+        <!-- Classic Views Activities -->
+        <activity
+            android:name=".classic.ClassicViewsActivity"
+            android:exported="false"
+            android:label="@string/classic_views_title"
+            android:parentActivityName=".MainActivity" />
+            
+        <!-- Exercise 1: Content Description -->
+        <activity
+            android:name=".classic.exercise1.ContentDescriptionActivity"
+            android:exported="false"
+            android:label="@string/exercise1_title"
+            android:parentActivityName=".classic.ClassicViewsActivity" />
     </application>
 
 </manifest>

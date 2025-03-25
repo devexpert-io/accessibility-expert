@@ -19,4 +19,9 @@
     <string name="settings_clicked">Settings clicked</string>
     <string name="profile_clicked">Profile clicked</string>
     
+    <!-- Content Descriptions -->
+    <string name="cd_home_button">Go to Home</string>
+    <string name="cd_settings_button">Go to Settings</string>
+    <string name="cd_profile_button">Go to Profile</string>
+    
 </resources>

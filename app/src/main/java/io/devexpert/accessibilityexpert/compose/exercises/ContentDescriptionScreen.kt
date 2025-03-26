@@ -73,7 +73,7 @@ fun ContentDescriptionScreen(
                 ) {
                     Icon(
                         imageVector = Icons.Filled.Home,
-                        contentDescription = null, // TODO: Add content description
+                        contentDescription = stringResource(R.string.cd_home_button),
                         modifier = Modifier.size(36.dp)
                     )
                 }
@@ -84,7 +84,7 @@ fun ContentDescriptionScreen(
                 ) {
                     Icon(
                         imageVector = Icons.Filled.Settings,
-                        contentDescription = null, // TODO: Add content description
+                        contentDescription = stringResource(R.string.cd_settings_button),
                         modifier = Modifier.size(36.dp)
                     )
                 }
@@ -95,7 +95,7 @@ fun ContentDescriptionScreen(
                 ) {
                     Icon(
                         imageVector = Icons.Filled.Person,
-                        contentDescription = null, // TODO: Add content description
+                        contentDescription = stringResource(R.string.cd_profile_button),
                         modifier = Modifier.size(36.dp)
                     )
                 }

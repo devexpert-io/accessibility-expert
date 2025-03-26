@@ -6,6 +6,8 @@
     <string name="solution">Solution</string>
     <string name="choose_option">Choose an option:</string>
     <string name="classic_views_title">Classic Views Exercises</string>
+    <string name="compose_views_title">Jetpack Compose Exercises</string>
+    <string name="navigate_back">Navigate back</string>
     <string name="exercise1_title">1. Content Description for Images</string>
 
     <!-- Main Activity -->
@@ -26,5 +28,5 @@
     
     <!-- Accessibility Service -->
     <string name="accessibility_service_description">Logs accessibility events to help developers understand how accessibility works</string>
-    
+
 </resources>

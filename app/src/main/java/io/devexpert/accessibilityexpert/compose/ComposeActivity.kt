@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import io.devexpert.accessibilityexpert.compose.exercises.ColorContrastScreen
 import io.devexpert.accessibilityexpert.compose.exercises.ContentDescriptionScreen
 import io.devexpert.accessibilityexpert.ui.theme.AccessibilityExpertTheme
 
@@ -48,6 +49,12 @@ fun AppNavigation(onBack: () -> Unit) {
 
         composable<ContentDescriptionScreen> {
             ContentDescriptionScreen(
+                onBack = { navController.navigateUp() }
+            )
+        }
+        
+        composable<ColorContrastScreen> {
+            ColorContrastScreen(
                 onBack = { navController.navigateUp() }
             )
         }

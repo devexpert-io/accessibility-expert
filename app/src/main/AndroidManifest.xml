@@ -35,6 +35,12 @@
             android:label="@string/exercise1_title"
             android:parentActivityName=".classic.ClassicViewsActivity" />
             
+        <!-- Exercise 2: Color Contrast -->
+        <activity
+            android:name=".classic.exercise2.ColorContrastActivity"
+            android:label="@string/exercise2_title"
+            android:parentActivityName=".classic.ClassicViewsActivity" />
+            
         <!-- Compose Activities -->
         <activity
             android:name=".compose.ComposeActivity"

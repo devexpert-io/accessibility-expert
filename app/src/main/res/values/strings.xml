@@ -9,6 +9,7 @@
     <string name="compose_views_title">Jetpack Compose Exercises</string>
     <string name="navigate_back">Navigate back</string>
     <string name="exercise1_title">1. Content Description for Images</string>
+    <string name="exercise2_title">2. Color Contrast</string>
 
     <!-- Main Activity -->
     <string name="main_title">Android Accessibility</string>
@@ -28,5 +29,17 @@
     
     <!-- Accessibility Service -->
     <string name="accessibility_service_description">Logs accessibility events to help developers understand how accessibility works</string>
+    
+    <!-- Exercise 2: Color Contrast -->
+    <string name="exercise2_header">Color Contrast Exercise</string>
+    <string name="exercise2_description">This exercise demonstrates the importance of sufficient color contrast in UI elements. Text with low color contrast can be difficult to read, especially for users with visual impairments. Different requirements apply to different sizes of text.</string>
+    
+    <string name="exercise2_small_text_title">Small Text Example</string>
+    <string name="exercise2_small_text_description">This is regular-sized text (smaller than 18pt or 14pt bold). According to WCAG guidelines, small text should have a contrast ratio of at least 4.5:1 against its background for good readability.</string>
+    
+    <string name="exercise2_large_text_title">Large Text Example</string>
+    <string name="exercise2_large_text_description">This is large text (18pt or larger, or 14pt bold or larger). According to WCAG guidelines, large text only needs a contrast ratio of at least 3:1 against its background to be considered accessible.</string>
+    
+    <string name="exercise2_instruction">Try using an accessibility scanning tool to detect these contrast issues. Tools like Android\'s Accessibility Scanner can identify elements with insufficient contrast and differentiate between requirements for small and large text.</string>
 
 </resources>

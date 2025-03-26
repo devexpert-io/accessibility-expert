@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
@@ -13,6 +14,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -20,6 +22,8 @@ import io.devexpert.accessibilityexpert.R
 import io.devexpert.accessibilityexpert.compose.components.BackIconButton
 import io.devexpert.accessibilityexpert.compose.exercises.ColorContrastScreen
 import io.devexpert.accessibilityexpert.compose.exercises.ContentDescriptionScreen
+import io.devexpert.accessibilityexpert.compose.preview.MultiPreview
+import io.devexpert.accessibilityexpert.ui.theme.AccessibilityExpertTheme
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -60,12 +64,15 @@ fun ComposeExerciseList(
         modifier = modifier
             .padding(16.dp)
             .verticalScroll(rememberScrollState()),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         getExerciseItems().forEach { exercise ->
             Button(
                 onClick = { onExerciseClick(exercise) },
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                    .widthIn(max = 320.dp)
+                    .fillMaxWidth()
             ) {
                 Text(text = stringResource(id = exercise.titleRes))
             }
@@ -96,4 +103,15 @@ private fun getExerciseItems(): List<ExerciseItem> {
         )
         // More exercises will be added here
     )
+}
+
+@MultiPreview
+@Composable
+fun ExerciseListScreenPreview() {
+    AccessibilityExpertTheme {
+        ExerciseListScreen(
+            onExerciseClick = {},
+            onBack = {}
+        )
+    }
 } 

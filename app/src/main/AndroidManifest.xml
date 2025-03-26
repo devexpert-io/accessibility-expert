@@ -26,16 +26,20 @@
         <!-- Classic Views Activities -->
         <activity
             android:name=".classic.ClassicViewsActivity"
-            android:exported="false"
             android:label="@string/classic_views_title"
             android:parentActivityName=".MainActivity" />
             
         <!-- Exercise 1: Content Description -->
         <activity
             android:name=".classic.exercise1.ContentDescriptionActivity"
-            android:exported="false"
             android:label="@string/exercise1_title"
             android:parentActivityName=".classic.ClassicViewsActivity" />
+            
+        <!-- Compose Activities -->
+        <activity
+            android:name=".compose.ComposeActivity"
+            android:label="@string/compose_views_title"
+            android:parentActivityName=".MainActivity" />
             
         <!-- Accessibility Service -->
         <service

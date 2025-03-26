@@ -23,6 +23,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import io.devexpert.accessibilityexpert.classic.ClassicViewsActivity
+import io.devexpert.accessibilityexpert.compose.ComposeActivity
 import io.devexpert.accessibilityexpert.ui.theme.AccessibilityExpertTheme
 
 class MainActivity : ComponentActivity() {
@@ -78,15 +79,14 @@ fun AccessibilityDashboard(modifier: Modifier = Modifier) {
         
         Button(
             onClick = {
-                // We'll implement ComposeActivity later
-                // context.startActivity(Intent(context, ComposeActivity::class.java))
+                context.startActivity(Intent(context, ComposeActivity::class.java))
             },
             modifier = Modifier
                 .fillMaxWidth(0.7f)
                 .padding(vertical = 8.dp),
-            enabled = false
+            enabled = true
         ) {
-            Text(stringResource(R.string.compose_button))
+            Text(text = stringResource(R.string.compose_button).replace(" (Coming Soon)", ""))
         }
     }
 }

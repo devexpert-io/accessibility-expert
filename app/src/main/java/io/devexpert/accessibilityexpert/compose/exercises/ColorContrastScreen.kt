@@ -25,6 +25,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import io.devexpert.accessibilityexpert.R
 import io.devexpert.accessibilityexpert.compose.components.BackIconButton
+import io.devexpert.accessibilityexpert.compose.preview.MultiPreview
+import io.devexpert.accessibilityexpert.ui.theme.AccessibilityExpertTheme
 import kotlinx.serialization.Serializable
 
 /**
@@ -89,14 +91,14 @@ fun ColorContrastScreen(
                         text = stringResource(R.string.exercise2_small_text_title),
                         fontSize = 16.sp,
                         fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.tertiary,
+                        color = MaterialTheme.colorScheme.onPrimary,
                         modifier = Modifier.padding(bottom = 8.dp)
                     )
                     
                     Text(
                         text = stringResource(R.string.exercise2_small_text_description),
                         fontSize = 14.sp,
-                        color = MaterialTheme.colorScheme.tertiary
+                        color = MaterialTheme.colorScheme.onPrimary
                     )
                 }
             }
@@ -117,14 +119,14 @@ fun ColorContrastScreen(
                         text = stringResource(R.string.exercise2_large_text_title),
                         fontSize = 22.sp,
                         fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.tertiary,
+                        color = MaterialTheme.colorScheme.onPrimary,
                         modifier = Modifier.padding(bottom = 8.dp)
                     )
                     
                     Text(
                         text = stringResource(R.string.exercise2_large_text_description),
                         fontSize = 18.sp,
-                        color = MaterialTheme.colorScheme.tertiary
+                        color = MaterialTheme.colorScheme.onPrimary
                     )
                 }
             }
@@ -138,3 +140,11 @@ fun ColorContrastScreen(
         }
     }
 }
+
+@MultiPreview
+@Composable
+fun ColorContrastScreenPreview() {
+    AccessibilityExpertTheme {
+        ColorContrastScreen(onBack = {})
+    }
+} 

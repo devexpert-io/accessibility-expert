@@ -18,6 +18,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import io.devexpert.accessibilityexpert.R
 import io.devexpert.accessibilityexpert.compose.components.BackIconButton
+import io.devexpert.accessibilityexpert.compose.exercises.ColorContrastScreen
 import io.devexpert.accessibilityexpert.compose.exercises.ContentDescriptionScreen
 import kotlinx.serialization.Serializable
 
@@ -88,6 +89,10 @@ private fun getExerciseItems(): List<ExerciseItem> {
         ExerciseItem(
             titleRes = R.string.exercise1_title,
             route = ContentDescriptionScreen
+        ),
+        ExerciseItem(
+            titleRes = R.string.exercise2_title,
+            route = ColorContrastScreen
         )
         // More exercises will be added here
     )

@@ -24,6 +24,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -83,6 +84,11 @@ fun FormContent(
     var password by remember { mutableStateOf("") }
     var showLoginResult by remember { mutableStateOf(false) }
     var loginSuccessful by remember { mutableStateOf(false) }
+    
+    var emailError by remember { mutableStateOf<String?>(null) }
+    var passwordError by remember { mutableStateOf<String?>(null) }
+    
+    val context = LocalContext.current
 
     Column(
         modifier = modifier
@@ -99,34 +105,61 @@ fun FormContent(
                 .fillMaxWidth()
                 .padding(bottom = 8.dp)
         )
+
         // Email field
+        val emailSupportingText = emailError ?: stringResource(R.string.required_field)
+        
         OutlinedTextField(
             value = email,
-            onValueChange = { email = it },
+            onValueChange = { email = it; emailError = null },
             modifier = Modifier.fillMaxWidth(),
             label = { Text(stringResource(R.string.username)) },
-            supportingText = { Text(stringResource(R.string.required_field)) },
+            supportingText = { Text(emailSupportingText) },
+            isError = emailError != null,
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
         )
 
         // Password field
+        val passwordSupportingText = passwordError ?: stringResource(R.string.required_field)
+
         OutlinedTextField(
             value = password,
-            onValueChange = { password = it },
+            onValueChange = { password = it; passwordError = null },
             modifier = Modifier.fillMaxWidth(),
             visualTransformation = PasswordVisualTransformation(),
             label = { Text(stringResource(R.string.password)) },
-            supportingText = { Text(stringResource(R.string.required_field)) },
+            supportingText = { Text(passwordSupportingText) },
+            isError = passwordError != null,
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
         )
 
         // Login button
         Button(
             onClick = {
-                // Basic validation
-                val isValid = email.isNotEmpty() && email.contains("@") &&
-                        password.isNotEmpty() && password.length >= 5
+                // Clear previous errors
+                emailError = null
+                passwordError = null
+                var isValid = true
 
+                // Validate email
+                if (email.isEmpty()) {
+                    emailError = context.getString(R.string.username_required_error)
+                    isValid = false
+                } else if (!email.contains('@')) {
+                    emailError = context.getString(R.string.email_invalid)
+                    isValid = false
+                }
+
+                // Validate password
+                if (password.isEmpty()) {
+                    passwordError = context.getString(R.string.password_required_error)
+                    isValid = false
+                } else if (password.length < 5) {
+                    passwordError = context.getString(R.string.password_invalid)
+                    isValid = false
+                }
+
+                // Display login result
                 showLoginResult = true
                 loginSuccessful = isValid
             },

@@ -156,7 +156,13 @@ fun FavoriteItemCard(
                 )
             }
 
-            val favoriteContentDescription = stringResource(R.string.favorite)
+            // Use different content descriptions based on the current favorite state
+            // Include the item title in the content description to make it unique for each item
+            val favoriteContentDescription = if (isFavorite) {
+                stringResource(R.string.remove_from_favorites, item.title)
+            } else {
+                stringResource(R.string.add_to_favorites, item.title)
+            }
 
             IconButton(onClick = onToggleFavorite) {
                 Icon(

@@ -46,6 +46,8 @@
     <!-- Exercise 3: Favorite List -->
     <string name="exercise_favorite_list_description">This exercise demonstrates how to create an accessible list with favorite icons. Each item can be marked as favorite by clicking the icon. The icons have proper content descriptions to ensure screen readers can announce their purpose correctly.</string>
     <string name="favorite">Add/Remove from favorite</string>
+    <string name="add_to_favorites">Add %1$s to favorites</string>
+    <string name="remove_from_favorites">Remove %1$s from favorites</string>
     <string name="favorite_item_title">Item %d</string>
     <string name="favorite_item_description">Description for item %d. This is a sample item that can be marked as favorite.</string>
 

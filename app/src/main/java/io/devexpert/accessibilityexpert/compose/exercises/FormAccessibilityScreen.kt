@@ -104,6 +104,7 @@ fun FormContent(
             value = email,
             onValueChange = { email = it },
             modifier = Modifier.fillMaxWidth(),
+            label = { Text(stringResource(R.string.username)) },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
         )
 
@@ -113,6 +114,7 @@ fun FormContent(
             onValueChange = { password = it },
             modifier = Modifier.fillMaxWidth(),
             visualTransformation = PasswordVisualTransformation(),
+            label = { Text(stringResource(R.string.password)) },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
         )
 

@@ -51,7 +51,8 @@
                     android:id="@+id/username_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp">
+                    android:layout_marginBottom="16dp"
+                    app:helperText="@string/required_field">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/username_input"
@@ -67,7 +68,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="24dp"
-                    app:endIconMode="password_toggle">
+                    app:endIconMode="password_toggle"
+                    app:helperText="@string/required_field">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/password_input"

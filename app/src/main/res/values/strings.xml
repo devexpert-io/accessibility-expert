@@ -56,11 +56,12 @@
     <string name="exercise4_header">Form Accessibility Exercise</string>
     <string name="exercise4_description">This exercise demonstrates how to create an accessible login form. The form includes text fields for username and password, along with a login button.</string>
     <string name="login">Login</string>
-    <string name="username">Email</string>
-    <string name="password">Password</string>
+    <string name="username">Email*</string>
+    <string name="password">Password*</string>
+    <string name="required_field">* Required</string>
     <string name="login_success">Login successful!</string>
-    <string name="username_required">Email is required</string>
-    <string name="password_required">Password is required</string>
+    <string name="username_required_error">Email is required</string>
+    <string name="password_required_error">Password is required</string>
     <string name="login_result_success">Login successful! Welcome back.</string>
     <string name="login_result_failure">Login failed. Please check your credentials.</string>
     <string name="email_invalid">Email must contain @ symbol</string>

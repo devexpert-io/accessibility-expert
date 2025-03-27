@@ -24,6 +24,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.autofill.ContentType
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.FocusRequester.Companion.FocusRequesterFactory.component1
 import androidx.compose.ui.focus.FocusRequester.Companion.FocusRequesterFactory.component2
@@ -31,6 +32,8 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentType
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
@@ -89,10 +92,10 @@ fun FormContent(
     var password by remember { mutableStateOf("") }
     var showLoginResult by remember { mutableStateOf(false) }
     var loginSuccessful by remember { mutableStateOf(false) }
-    
+
     var emailError by remember { mutableStateOf<String?>(null) }
     var passwordError by remember { mutableStateOf<String?>(null) }
-    
+
     val context = LocalContext.current
 
     val (emailFocusRequester, passwordFocusRequester) = remember { FocusRequester.createRefs() }
@@ -116,13 +119,14 @@ fun FormContent(
 
         // Email field
         val emailSupportingText = emailError ?: stringResource(R.string.required_field)
-        
+
         OutlinedTextField(
             value = email,
             onValueChange = { email = it; emailError = null },
             modifier = Modifier
                 .fillMaxWidth()
-                .focusRequester(emailFocusRequester),
+                .focusRequester(emailFocusRequester)
+                .semantics { contentType = ContentType.EmailAddress },
             label = { Text(stringResource(R.string.username)) },
             supportingText = { Text(emailSupportingText) },
             isError = emailError != null,
@@ -137,14 +141,15 @@ fun FormContent(
             onValueChange = { password = it; passwordError = null },
             modifier = Modifier
                 .fillMaxWidth()
-                .focusRequester(passwordFocusRequester),
+                .focusRequester(passwordFocusRequester)
+                .semantics { contentType = ContentType.Password },
             visualTransformation = PasswordVisualTransformation(),
             label = { Text(stringResource(R.string.password)) },
             supportingText = { Text(passwordSupportingText) },
             isError = passwordError != null,
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
         )
-
+        
         // Login button
         Button(
             onClick = {

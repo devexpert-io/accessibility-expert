@@ -10,6 +10,7 @@
     <string name="navigate_back">Navigate back</string>
     <string name="exercise1_title">1. Content Description for Images</string>
     <string name="exercise2_title">2. Color Contrast</string>
+    <string name="exercise_favorite_list_title">3. Lists accessibility</string>
 
     <!-- Main Activity -->
     <string name="main_title">Android Accessibility</string>
@@ -41,5 +42,11 @@
     <string name="exercise2_large_text_description">This is large text (18pt or larger, or 14pt bold or larger). According to WCAG guidelines, large text only needs a contrast ratio of at least 3:1 against its background to be considered accessible.</string>
     
     <string name="exercise2_instruction">Try using an accessibility scanning tool to detect these contrast issues. Tools like Android\'s Accessibility Scanner can identify elements with insufficient contrast and differentiate between requirements for small and large text.</string>
+
+    <!-- Exercise 3: Favorite List -->
+    <string name="exercise_favorite_list_description">This exercise demonstrates how to create an accessible list with favorite icons. Each item can be marked as favorite by clicking the icon. The icons have proper content descriptions to ensure screen readers can announce their purpose correctly.</string>
+    <string name="favorite">Add/Remove from favorite</string>
+    <string name="favorite_item_title">Item %d</string>
+    <string name="favorite_item_description">Description for item %d. This is a sample item that can be marked as favorite.</string>
 
 </resources>

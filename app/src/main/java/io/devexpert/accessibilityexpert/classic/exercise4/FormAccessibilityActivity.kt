@@ -88,6 +88,13 @@ class FormAccessibilityActivity : AppCompatActivity() {
             binding.loginResult.setTextColor(
                 MaterialColors.getColor(binding.loginResult, android.R.attr.colorError)
             )
+
+            // Set focus to the first field with an error
+            if (binding.usernameLayout.error != null) {
+                binding.usernameInput.requestFocus()
+            } else if (binding.passwordLayout.error != null) {
+                binding.passwordInput.requestFocus()
+            }
         }
     }
 } 

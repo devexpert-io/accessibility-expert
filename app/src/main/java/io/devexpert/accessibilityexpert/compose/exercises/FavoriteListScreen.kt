@@ -32,9 +32,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.max
 import io.devexpert.accessibilityexpert.R
 import io.devexpert.accessibilityexpert.compose.components.BackIconButton
 import io.devexpert.accessibilityexpert.compose.preview.MultiPreview
@@ -142,6 +142,7 @@ fun FavoriteItemCard(
                 modifier = Modifier
                     .padding(end = 16.dp)
                     .weight(1f)
+                    .semantics(mergeDescendants = true) {}
             ) {
                 Text(
                     text = item.title,

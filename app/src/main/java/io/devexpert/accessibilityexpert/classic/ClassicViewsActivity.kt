@@ -6,6 +6,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import io.devexpert.accessibilityexpert.classic.exercise1.ContentDescriptionActivity
 import io.devexpert.accessibilityexpert.classic.exercise2.ColorContrastActivity
+import io.devexpert.accessibilityexpert.classic.exercise4.FormAccessibilityActivity
 import io.devexpert.accessibilityexpert.databinding.ActivityClassicViewsBinding
 
 /**
@@ -39,6 +40,11 @@ class ClassicViewsActivity : AppCompatActivity() {
         // Exercise 2: Color Contrast
         binding.btnExercise2.setOnClickListener {
             startActivity(Intent(this, ColorContrastActivity::class.java))
+        }
+        
+        // Exercise 4: Form Accessibility
+        binding.btnExercise4.setOnClickListener {
+            startActivity(Intent(this, FormAccessibilityActivity::class.java))
         }
         
         // More exercise buttons will be initialized here

@@ -41,6 +41,12 @@
             android:label="@string/exercise2_title"
             android:parentActivityName=".classic.ClassicViewsActivity" />
             
+        <!-- Exercise 4: Form Accessibility -->
+        <activity
+            android:name=".classic.exercise4.FormAccessibilityActivity"
+            android:label="@string/exercise4_title"
+            android:parentActivityName=".classic.ClassicViewsActivity" />
+            
         <!-- Compose Activities -->
         <activity
             android:name=".compose.ComposeActivity"

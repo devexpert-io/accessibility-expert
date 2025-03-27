@@ -11,6 +11,7 @@
     <string name="exercise1_title">1. Content Description for Images</string>
     <string name="exercise2_title">2. Color Contrast</string>
     <string name="exercise_favorite_list_title">3. Lists accessibility</string>
+    <string name="exercise4_title">4. Form Accessibility</string>
 
     <!-- Main Activity -->
     <string name="main_title">Android Accessibility</string>
@@ -50,5 +51,19 @@
     <string name="remove_from_favorites">Remove %1$s from favorites</string>
     <string name="favorite_item_title">Item %d</string>
     <string name="favorite_item_description">Description for item %d. This is a sample item that can be marked as favorite.</string>
+
+    <!-- Exercise 4: Form Accessibility -->
+    <string name="exercise4_header">Form Accessibility Exercise</string>
+    <string name="exercise4_description">This exercise demonstrates how to create an accessible login form. The form includes text fields for username and password, along with a login button.</string>
+    <string name="login">Login</string>
+    <string name="username">Email</string>
+    <string name="password">Password</string>
+    <string name="login_success">Login successful!</string>
+    <string name="username_required">Email is required</string>
+    <string name="password_required">Password is required</string>
+    <string name="login_result_success">Login successful! Welcome back.</string>
+    <string name="login_result_failure">Login failed. Please check your credentials.</string>
+    <string name="email_invalid">Email must contain @ symbol</string>
+    <string name="password_invalid">Password must be at least 5 characters</string>
 
 </resources>

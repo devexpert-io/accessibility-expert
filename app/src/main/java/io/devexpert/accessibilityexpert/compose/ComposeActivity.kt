@@ -10,6 +10,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import io.devexpert.accessibilityexpert.compose.exercises.ColorContrastScreen
 import io.devexpert.accessibilityexpert.compose.exercises.ContentDescriptionScreen
+import io.devexpert.accessibilityexpert.compose.exercises.FavoriteListScreen
 import io.devexpert.accessibilityexpert.ui.theme.AccessibilityExpertTheme
 
 /**
@@ -55,6 +56,12 @@ fun AppNavigation(onBack: () -> Unit) {
         
         composable<ColorContrastScreen> {
             ColorContrastScreen(
+                onBack = { navController.navigateUp() }
+            )
+        }
+        
+        composable<FavoriteListScreen> {
+            FavoriteListScreen(
                 onBack = { navController.navigateUp() }
             )
         }

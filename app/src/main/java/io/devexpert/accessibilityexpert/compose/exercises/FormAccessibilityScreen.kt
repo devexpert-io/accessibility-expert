@@ -24,7 +24,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.FocusRequester.Companion.FocusRequesterFactory.component1
+import androidx.compose.ui.focus.FocusRequester.Companion.FocusRequesterFactory.component2
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -90,6 +95,9 @@ fun FormContent(
     
     val context = LocalContext.current
 
+    val (emailFocusRequester, passwordFocusRequester) = remember { FocusRequester.createRefs() }
+    val focusManager = LocalFocusManager.current
+
     Column(
         modifier = modifier
             .padding(16.dp)
@@ -112,7 +120,9 @@ fun FormContent(
         OutlinedTextField(
             value = email,
             onValueChange = { email = it; emailError = null },
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .focusRequester(emailFocusRequester),
             label = { Text(stringResource(R.string.username)) },
             supportingText = { Text(emailSupportingText) },
             isError = emailError != null,
@@ -125,7 +135,9 @@ fun FormContent(
         OutlinedTextField(
             value = password,
             onValueChange = { password = it; passwordError = null },
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .focusRequester(passwordFocusRequester),
             visualTransformation = PasswordVisualTransformation(),
             label = { Text(stringResource(R.string.password)) },
             supportingText = { Text(passwordSupportingText) },
@@ -162,6 +174,13 @@ fun FormContent(
                 // Display login result
                 showLoginResult = true
                 loginSuccessful = isValid
+
+                // Set focus to first field with error
+                when {
+                    emailError != null -> emailFocusRequester.requestFocus()
+                    passwordError != null -> passwordFocusRequester.requestFocus()
+                    else -> focusManager.clearFocus()
+                }
             },
             modifier = Modifier.fillMaxWidth()
         ) {

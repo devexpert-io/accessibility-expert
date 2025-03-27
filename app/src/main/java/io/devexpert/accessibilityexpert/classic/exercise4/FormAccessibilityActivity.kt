@@ -44,9 +44,34 @@ class FormAccessibilityActivity : AppCompatActivity() {
     private fun handleLogin() {
         val email = binding.usernameInput.text.toString()
         val password = binding.passwordInput.text.toString()
-
-        val isValid = email.isNotEmpty() && email.contains("@")
-                && password.isNotEmpty() && password.length >= 5
+        
+        // Clear previous errors
+        binding.usernameLayout.error = null
+        binding.passwordLayout.error = null
+        
+        var isValid = true
+        
+        // Check if email is empty
+        if (email.isEmpty()) {
+            binding.usernameLayout.error = getString(R.string.username_required_error)
+            isValid = false
+        } 
+        // Check if email contains @
+        else if (!email.contains('@')) {
+            binding.usernameLayout.error = getString(R.string.email_invalid)
+            isValid = false
+        }
+        
+        // Check if password is empty
+        if (password.isEmpty()) {
+            binding.passwordLayout.error = getString(R.string.password_required_error)
+            isValid = false
+        } 
+        // Check if password is at least 5 characters
+        else if (password.length < 5) {
+            binding.passwordLayout.error = getString(R.string.password_invalid)
+            isValid = false
+        }
 
         // Display login result
         binding.loginResult.visibility = View.VISIBLE

@@ -1,7 +1,6 @@
 package io.devexpert.accessibilityexpert.compose.exercise5
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -52,7 +51,9 @@ import androidx.compose.ui.input.key.onKeyEvent
 import androidx.compose.ui.input.key.type
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.isTraversalGroup
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.traversalIndex
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import io.devexpert.accessibilityexpert.R
@@ -193,7 +194,8 @@ fun ButtonRow(nextFocus: FocusRequester, rowFocusRequester: FocusRequester) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .focusRequester(rowFocusRequester),
+            .focusRequester(rowFocusRequester)
+            .semantics { isTraversalGroup = true },
         horizontalArrangement = Arrangement.SpaceEvenly,
     ) {
         TextButton(
@@ -202,9 +204,8 @@ fun ButtonRow(nextFocus: FocusRequester, rowFocusRequester: FocusRequester) {
                 .wrapContentSize()
                 .padding(horizontal = 4.dp)
                 .focusRequester(b1)
-                .focusProperties {
-                    next = b3
-                }
+                .focusProperties { next = b3 }
+                .semantics { traversalIndex = 1f }
         ) {
             Text(stringResource(R.string.button_1))
         }
@@ -214,9 +215,8 @@ fun ButtonRow(nextFocus: FocusRequester, rowFocusRequester: FocusRequester) {
                 .wrapContentSize()
                 .padding(horizontal = 4.dp)
                 .focusRequester(b2)
-                .focusProperties {
-                    next = b4
-                }
+                .focusProperties { next = b4 }
+                .semantics { traversalIndex = 3f }
         ) {
             Text(stringResource(R.string.button_2))
         }
@@ -226,9 +226,8 @@ fun ButtonRow(nextFocus: FocusRequester, rowFocusRequester: FocusRequester) {
                 .wrapContentSize()
                 .padding(horizontal = 4.dp)
                 .focusRequester(b3)
-                .focusProperties {
-                    next = b2
-                }
+                .focusProperties { next = b2 }
+                .semantics { traversalIndex = 2f }
         ) {
             Text(stringResource(R.string.button_3))
         }
@@ -239,6 +238,7 @@ fun ButtonRow(nextFocus: FocusRequester, rowFocusRequester: FocusRequester) {
                 .padding(horizontal = 4.dp)
                 .focusRequester(b4)
                 .focusProperties { next = nextFocus }
+                .semantics { traversalIndex = 4f }
         ) {
             Text(stringResource(R.string.button_4))
         }

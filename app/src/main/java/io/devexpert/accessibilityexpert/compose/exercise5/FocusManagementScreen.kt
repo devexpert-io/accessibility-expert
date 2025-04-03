@@ -1,6 +1,7 @@
 package io.devexpert.accessibilityexpert.compose.exercise5
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -9,6 +10,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.Send
@@ -42,8 +45,14 @@ import androidx.compose.ui.focus.FocusRequester.Companion.FocusRequesterFactory.
 import androidx.compose.ui.focus.FocusRequester.Companion.FocusRequesterFactory.component4
 import androidx.compose.ui.focus.focusProperties
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.input.key.Key
+import androidx.compose.ui.input.key.KeyEventType
+import androidx.compose.ui.input.key.key
+import androidx.compose.ui.input.key.onKeyEvent
+import androidx.compose.ui.input.key.type
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import io.devexpert.accessibilityexpert.R
@@ -58,7 +67,7 @@ object FocusManagementScreen
 fun FocusManagementNavigationScreen(onBack: () -> Unit) {
 
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
-    val bottomNavRequester = remember { FocusRequester() }
+    val (bottomNavRequester, buttonsRowRequester) = remember { FocusRequester.createRefs() }
 
     Scaffold(
         topBar = {
@@ -90,8 +99,20 @@ fun FocusManagementNavigationScreen(onBack: () -> Unit) {
                 .padding(paddingValues)
                 .fillMaxSize()
         ) {
-            ButtonRow(bottomNavRequester)
-            ItemsList()
+            ButtonRow(
+                nextFocus = bottomNavRequester,
+                rowFocusRequester = buttonsRowRequester
+            )
+            ItemsList(
+                onMoveLeft = {
+                    buttonsRowRequester.requestFocus()
+                    true
+                },
+                onMoveRight = {
+                    bottomNavRequester.requestFocus()
+                    true
+                }
+            )
         }
     }
 }
@@ -166,10 +187,13 @@ private fun BottomNavigationBar(focusRequester: FocusRequester) {
 }
 
 @Composable
-fun ButtonRow(nextFocus: FocusRequester? = null) {
+fun ButtonRow(nextFocus: FocusRequester, rowFocusRequester: FocusRequester) {
     val (b1, b2, b3, b4) = remember { FocusRequester.createRefs() }
+
     Row(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .focusRequester(rowFocusRequester),
         horizontalArrangement = Arrangement.SpaceEvenly,
     ) {
         TextButton(
@@ -214,9 +238,7 @@ fun ButtonRow(nextFocus: FocusRequester? = null) {
                 .wrapContentSize()
                 .padding(horizontal = 4.dp)
                 .focusRequester(b4)
-                .focusProperties {
-                    nextFocus?.let { next = nextFocus }
-                }
+                .focusProperties { next = nextFocus }
         ) {
             Text(stringResource(R.string.button_4))
         }
@@ -224,11 +246,28 @@ fun ButtonRow(nextFocus: FocusRequester? = null) {
 }
 
 @Composable
-fun ItemsList() {
-    LazyColumn(modifier = Modifier.fillMaxWidth()) {
-        items(20) { index ->
+fun ItemsList(onMoveLeft: () -> Boolean, onMoveRight: () -> Boolean) {
+    val listState = rememberLazyListState()
+
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxWidth()
+            .onKeyEvent { keyEvent ->
+                if (keyEvent.type != KeyEventType.KeyUp) {
+                    return@onKeyEvent false
+                }
+
+                when (keyEvent.key) {
+                    Key.DirectionLeft -> onMoveLeft()
+                    Key.DirectionRight -> onMoveRight()
+                    else -> false
+                }
+            },
+        state = listState
+    ) {
+        itemsIndexed(List(20) { it }) { index, item ->
             Text(
-                text = "Elemento $index",
+                text = "Elemento $item",
                 modifier = Modifier
                     .fillMaxWidth()
                     .clickable(onClick = {})

@@ -35,6 +35,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.CustomAccessibilityAction
+import androidx.compose.ui.semantics.customActions
+import androidx.compose.ui.semantics.hideFromAccessibility
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.IntOffset
@@ -94,13 +97,25 @@ fun ItemsList(modifier: Modifier = Modifier) {
 @Composable
 fun SwipeableListItem(text: String, modifier: Modifier = Modifier) {
     val state = rememberAnchoredDraggableState()
+    var isFavorite by remember { mutableStateOf(false) }
+    val likeButtonLabel = getLikeButtonLabel(isFavorite, text)
 
-    Box(modifier.background(MaterialTheme.colorScheme.surfaceVariant)) {
-        var isFavorite by remember { mutableStateOf(false) }
+    Box(
+        modifier
+            .background(MaterialTheme.colorScheme.surfaceVariant)
+            .semantics {
+                customActions = listOf(
+                    CustomAccessibilityAction(likeButtonLabel) {
+                        isFavorite = !isFavorite
+                        true
+                    }
+                )
+            }
+    ) {
         LikeButton(
-            text = text,
             isFavorite = isFavorite,
-            onClick = { isFavorite = !isFavorite }
+            onClick = { isFavorite = !isFavorite },
+            contentDescription = likeButtonLabel
         )
 
         Row(
@@ -126,16 +141,22 @@ fun SwipeableListItem(text: String, modifier: Modifier = Modifier) {
 }
 
 @Composable
-private fun BoxScope.LikeButton(text: String, isFavorite: Boolean, onClick: () -> Unit) {
+private fun BoxScope.LikeButton(
+    isFavorite: Boolean,
+    onClick: () -> Unit,
+    contentDescription: String
+) {
     IconButton(
         onClick = onClick,
-        modifier = Modifier.align(Alignment.CenterEnd)
+        modifier = Modifier
+            .align(Alignment.CenterEnd)
+            .semantics {
+                hideFromAccessibility()
+            }
     ) {
         Icon(
             imageVector = if (isFavorite) Icons.Filled.Favorite else Icons.Outlined.FavoriteBorder,
-            contentDescription = if (isFavorite)
-                stringResource(R.string.remove_favorite, text)
-            else stringResource(R.string.add_favorite, text),
+            contentDescription = contentDescription,
             tint = MaterialTheme.colorScheme.primary
         )
     }
@@ -145,6 +166,11 @@ enum class DragAnchors {
     Center,
     End
 }
+
+@Composable
+private fun getLikeButtonLabel(isFavorite: Boolean, text: String) =
+    if (isFavorite) stringResource(R.string.remove_favorite, text)
+    else stringResource(R.string.add_favorite, text)
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable

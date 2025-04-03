@@ -35,6 +35,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.FocusRequester.Companion.FocusRequesterFactory.component1
+import androidx.compose.ui.focus.FocusRequester.Companion.FocusRequesterFactory.component2
+import androidx.compose.ui.focus.FocusRequester.Companion.FocusRequesterFactory.component3
+import androidx.compose.ui.focus.FocusRequester.Companion.FocusRequesterFactory.component4
+import androidx.compose.ui.focus.focusProperties
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
@@ -51,6 +58,7 @@ object FocusManagementScreen
 fun FocusManagementNavigationScreen(onBack: () -> Unit) {
 
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
+    val bottomNavRequester = remember { FocusRequester() }
 
     Scaffold(
         topBar = {
@@ -74,7 +82,7 @@ fun FocusManagementNavigationScreen(onBack: () -> Unit) {
                 scrollBehavior = scrollBehavior
             )
         },
-        bottomBar = { BottomNavigationBar() },
+        bottomBar = { BottomNavigationBar(bottomNavRequester) },
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection)
     ) { paddingValues ->
         Column(
@@ -82,7 +90,7 @@ fun FocusManagementNavigationScreen(onBack: () -> Unit) {
                 .padding(paddingValues)
                 .fillMaxSize()
         ) {
-            ButtonRow()
+            ButtonRow(bottomNavRequester)
             ItemsList()
         }
     }
@@ -116,9 +124,11 @@ private fun MoreActions() {
 }
 
 @Composable
-private fun BottomNavigationBar() {
+private fun BottomNavigationBar(focusRequester: FocusRequester) {
     var selectedNavItem by remember { mutableIntStateOf(0) }
-    NavigationBar {
+    NavigationBar(
+        modifier = Modifier.focusRequester(focusRequester)
+    ) {
         NavigationBarItem(
             selected = selectedNavItem == 0,
             onClick = { selectedNavItem = 0 },
@@ -156,7 +166,8 @@ private fun BottomNavigationBar() {
 }
 
 @Composable
-fun ButtonRow() {
+fun ButtonRow(nextFocus: FocusRequester? = null) {
+    val (b1, b2, b3, b4) = remember { FocusRequester.createRefs() }
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceEvenly,
@@ -166,6 +177,10 @@ fun ButtonRow() {
             modifier = Modifier
                 .wrapContentSize()
                 .padding(horizontal = 4.dp)
+                .focusRequester(b1)
+                .focusProperties {
+                    next = b3
+                }
         ) {
             Text(stringResource(R.string.button_1))
         }
@@ -174,6 +189,10 @@ fun ButtonRow() {
             modifier = Modifier
                 .wrapContentSize()
                 .padding(horizontal = 4.dp)
+                .focusRequester(b2)
+                .focusProperties {
+                    next = b4
+                }
         ) {
             Text(stringResource(R.string.button_2))
         }
@@ -182,6 +201,10 @@ fun ButtonRow() {
             modifier = Modifier
                 .wrapContentSize()
                 .padding(horizontal = 4.dp)
+                .focusRequester(b3)
+                .focusProperties {
+                    next = b2
+                }
         ) {
             Text(stringResource(R.string.button_3))
         }
@@ -190,6 +213,10 @@ fun ButtonRow() {
             modifier = Modifier
                 .wrapContentSize()
                 .padding(horizontal = 4.dp)
+                .focusRequester(b4)
+                .focusProperties {
+                    nextFocus?.let { next = nextFocus }
+                }
         ) {
             Text(stringResource(R.string.button_4))
         }
@@ -198,9 +225,7 @@ fun ButtonRow() {
 
 @Composable
 fun ItemsList() {
-    LazyColumn(
-        modifier = Modifier.fillMaxWidth()
-    ) {
+    LazyColumn(modifier = Modifier.fillMaxWidth()) {
         items(20) { index ->
             Text(
                 text = "Elemento $index",

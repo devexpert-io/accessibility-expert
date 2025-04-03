@@ -48,6 +48,13 @@
             android:label="@string/exercise4_title"
             android:parentActivityName=".classic.ClassicViewsActivity" />
             
+        <!-- Exercise 5: Focus Management -->
+        <activity
+            android:name=".classic.exercise5.FocusManagementActivity"
+            android:exported="false"
+            android:parentActivityName=".classic.ClassicViewsActivity"
+            android:label="@string/exercise5_header" />
+            
         <!-- Compose Activities -->
         <activity
             android:name=".compose.ComposeActivity"

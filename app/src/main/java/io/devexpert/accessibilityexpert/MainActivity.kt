@@ -26,6 +26,7 @@ import io.devexpert.accessibilityexpert.classic.ClassicViewsActivity
 import io.devexpert.accessibilityexpert.compose.ComposeActivity
 import io.devexpert.accessibilityexpert.compose.preview.MultiPreview
 import io.devexpert.accessibilityexpert.ui.theme.AccessibilityExpertTheme
+import io.devexpert.accessibilityexpert.classic.exercise5.FocusManagementActivity
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

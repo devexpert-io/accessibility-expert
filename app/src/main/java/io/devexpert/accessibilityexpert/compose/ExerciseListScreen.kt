@@ -25,6 +25,7 @@ import io.devexpert.accessibilityexpert.compose.exercises.ContentDescriptionScre
 import io.devexpert.accessibilityexpert.compose.exercises.FavoriteListScreen
 import io.devexpert.accessibilityexpert.compose.exercises.FormAccessibilityScreen
 import io.devexpert.accessibilityexpert.compose.exercise5.FocusManagementScreen
+import io.devexpert.accessibilityexpert.compose.exercise6.AccessibilityActionsScreen
 import io.devexpert.accessibilityexpert.compose.preview.MultiPreview
 import io.devexpert.accessibilityexpert.ui.theme.AccessibilityExpertTheme
 import kotlinx.serialization.Serializable
@@ -115,6 +116,10 @@ private fun getExerciseItems(): List<ExerciseItem> {
         ExerciseItem(
             titleRes = R.string.exercise5_title,
             route = FocusManagementScreen
+        ),
+        ExerciseItem(
+            titleRes = R.string.exercise6_title,
+            route = AccessibilityActionsScreen
         )
         // More exercises will be added here
     )

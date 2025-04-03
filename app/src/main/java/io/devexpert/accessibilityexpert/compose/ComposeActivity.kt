@@ -8,6 +8,8 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import io.devexpert.accessibilityexpert.compose.exercise5.FocusManagementNavigationScreen
+import io.devexpert.accessibilityexpert.compose.exercise5.FocusManagementScreen
 import io.devexpert.accessibilityexpert.compose.exercises.ColorContrastScreen
 import io.devexpert.accessibilityexpert.compose.exercises.ContentDescriptionScreen
 import io.devexpert.accessibilityexpert.compose.exercises.FavoriteListScreen
@@ -69,6 +71,12 @@ fun AppNavigation(onBack: () -> Unit) {
         
         composable<FormAccessibilityScreen> {
             FormAccessibilityScreen(
+                onBack = { navController.navigateUp() }
+            )
+        }
+
+        composable<FocusManagementScreen> {
+            FocusManagementNavigationScreen(
                 onBack = { navController.navigateUp() }
             )
         }

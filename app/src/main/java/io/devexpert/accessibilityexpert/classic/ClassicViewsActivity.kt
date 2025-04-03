@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import io.devexpert.accessibilityexpert.classic.exercise1.ContentDescriptionActivity
 import io.devexpert.accessibilityexpert.classic.exercise2.ColorContrastActivity
 import io.devexpert.accessibilityexpert.classic.exercise4.FormAccessibilityActivity
+import io.devexpert.accessibilityexpert.classic.exercise5.FocusManagementActivity
 import io.devexpert.accessibilityexpert.databinding.ActivityClassicViewsBinding
 
 /**
@@ -26,6 +27,7 @@ class ClassicViewsActivity : AppCompatActivity() {
         // Set up the toolbar
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        binding.toolbar.isKeyboardNavigationCluster
         
         // Initialize exercise button click listeners
         initExerciseButtons()
@@ -45,6 +47,11 @@ class ClassicViewsActivity : AppCompatActivity() {
         // Exercise 4: Form Accessibility
         binding.btnExercise4.setOnClickListener {
             startActivity(Intent(this, FormAccessibilityActivity::class.java))
+        }
+        
+        // Exercise 5: Focus Management
+        binding.btnExercise5.setOnClickListener {
+            startActivity(Intent(this, FocusManagementActivity::class.java))
         }
         
         // More exercise buttons will be initialized here

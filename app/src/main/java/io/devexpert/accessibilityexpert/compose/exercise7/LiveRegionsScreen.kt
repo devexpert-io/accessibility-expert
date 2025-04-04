@@ -96,7 +96,10 @@ fun LiveRegionsContent(modifier: Modifier = Modifier) {
                 Text(
                     text = stringResource(R.string.button_pressed),
                     fontSize = 18.sp,
-                    fontWeight = MaterialTheme.typography.titleLarge.fontWeight
+                    fontWeight = MaterialTheme.typography.titleLarge.fontWeight,
+                    modifier = Modifier.semantics {
+                        liveRegion = LiveRegionMode.Assertive
+                    }
                 )
             }
         }

@@ -1,7 +1,10 @@
 package io.devexpert.accessibilityexpert.compose.exercise8
 
+import android.widget.Toast
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsFocusedAsState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -17,12 +20,19 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.drawText
 import androidx.compose.ui.text.rememberTextMeasurer
@@ -86,22 +96,39 @@ fun CustomViewContent(modifier: Modifier = Modifier) {
                 modifier = Modifier.fillMaxWidth()
             )
 
-            // Custom circle view
-            CustomCircleView(modifier = Modifier.size(200.dp))
+            val ctx = LocalContext.current
+
+            CustomCircleView(
+                onClick = {
+                    Toast.makeText(ctx, R.string.custom_view_clicked, Toast.LENGTH_SHORT).show()
+                },
+                modifier = Modifier.size(200.dp)
+            )
         }
     }
 }
 
 @Composable
-fun CustomCircleView(modifier: Modifier = Modifier) {
+fun CustomCircleView(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
     val textMeasurer = rememberTextMeasurer()
+    val textToDraw = stringResource(R.string.click)
+    val interactionSource = remember { MutableInteractionSource() }
+    val isFocused by interactionSource.collectIsFocusedAsState()
 
     Box(
-        modifier = modifier.background(Color.Transparent),
+        modifier = modifier
+            .clickable(
+                onClick = onClick,
+                role = Role.Button,
+                interactionSource = interactionSource,
+                indication = null
+            )
+            .semantics { contentDescription = textToDraw },
         contentAlignment = Alignment.Center
     ) {
-        val textToDraw = stringResource(R.string.click)
-
         Canvas(modifier = Modifier.fillMaxSize()) {
             val center = Offset(size.width / 2, size.height / 2)
             val radius = (size.minDimension / 2) - 10f
@@ -112,6 +139,16 @@ fun CustomCircleView(modifier: Modifier = Modifier) {
                 center = center,
                 radius = radius
             )
+
+            // Draw focus indicator when focused
+            if (isFocused) {
+                drawCircle(
+                    color = Color.Red,
+                    center = center,
+                    radius = radius + 5f,
+                    style = Stroke(width = 8f)
+                )
+            }
 
             val textLayoutResult = textMeasurer.measure(
                 text = textToDraw,

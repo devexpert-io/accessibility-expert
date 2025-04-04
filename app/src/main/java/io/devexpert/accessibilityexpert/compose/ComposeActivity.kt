@@ -14,6 +14,8 @@ import io.devexpert.accessibilityexpert.compose.exercise6.AccessibilityActionsNa
 import io.devexpert.accessibilityexpert.compose.exercise6.AccessibilityActionsScreen
 import io.devexpert.accessibilityexpert.compose.exercise7.LiveRegionsNavigationScreen
 import io.devexpert.accessibilityexpert.compose.exercise7.LiveRegionsScreen
+import io.devexpert.accessibilityexpert.compose.exercise8.CustomViewNavigationScreen
+import io.devexpert.accessibilityexpert.compose.exercise8.CustomViewScreen
 import io.devexpert.accessibilityexpert.compose.exercises.ColorContrastScreen
 import io.devexpert.accessibilityexpert.compose.exercises.ContentDescriptionScreen
 import io.devexpert.accessibilityexpert.compose.exercises.FavoriteListScreen
@@ -93,6 +95,12 @@ fun AppNavigation(onBack: () -> Unit) {
 
         composable<LiveRegionsScreen> {
             LiveRegionsNavigationScreen(
+                onBack = { navController.navigateUp() }
+            )
+        }
+
+        composable<CustomViewScreen> {
+            CustomViewNavigationScreen(
                 onBack = { navController.navigateUp() }
             )
         }

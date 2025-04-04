@@ -89,4 +89,11 @@
     <string name="add_favorite">Add %1$s to favorites</string>
     <string name="remove_favorite">Remove %1$s from favorites</string>
 
+    <!-- Exercise 7: Live Regions -->
+    <string name="exercise7_title">7. Live Regions</string>
+    <string name="exercise7_header">Live Regions Exercise</string>
+    <string name="exercise7_description">This exercise demonstrates how to use Live Regions to announce dynamic content changes to screen readers. When content changes in a Live Region, the screen reader will automatically announce these changes to the user.</string>
+    <string name="button_press">Press the button</string>
+    <string name="button_pressed">You pressed the button!</string>
+
 </resources>

@@ -62,6 +62,13 @@
             android:parentActivityName=".classic.ClassicViewsActivity"
             android:label="@string/exercise7_header" />
             
+        <!-- Exercise 8: Custom View Accessibility -->
+        <activity
+            android:name=".classic.exercise8.CustomViewActivity"
+            android:exported="false"
+            android:parentActivityName=".classic.ClassicViewsActivity"
+            android:label="@string/exercise8_header" />
+            
         <!-- Compose Activities -->
         <activity
             android:name=".compose.ComposeActivity"

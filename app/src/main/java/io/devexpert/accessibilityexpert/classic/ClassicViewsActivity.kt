@@ -9,6 +9,7 @@ import io.devexpert.accessibilityexpert.classic.exercise2.ColorContrastActivity
 import io.devexpert.accessibilityexpert.classic.exercise4.FormAccessibilityActivity
 import io.devexpert.accessibilityexpert.classic.exercise5.FocusManagementActivity
 import io.devexpert.accessibilityexpert.classic.exercise7.LiveRegionsActivity
+import io.devexpert.accessibilityexpert.classic.exercise8.CustomViewActivity
 import io.devexpert.accessibilityexpert.databinding.ActivityClassicViewsBinding
 
 /**
@@ -58,6 +59,11 @@ class ClassicViewsActivity : AppCompatActivity() {
         // Exercise 7: Live Regions
         binding.btnExercise7.setOnClickListener {
             startActivity(Intent(this, LiveRegionsActivity::class.java))
+        }
+        
+        // Exercise 8: Custom View Accessibility
+        binding.btnExercise8.setOnClickListener {
+            startActivity(Intent(this, CustomViewActivity::class.java))
         }
         
         // More exercise buttons will be initialized here

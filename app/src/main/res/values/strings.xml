@@ -96,4 +96,12 @@
     <string name="button_press">Press the button</string>
     <string name="button_pressed">You pressed the button!</string>
 
+    <!-- Exercise 8: Custom View Accessibility -->
+    <string name="exercise8_title">8. Custom View Accessibility</string>
+    <string name="exercise8_header">Custom View Accessibility</string>
+    <string name="exercise8_description">This exercise demonstrates how to make custom views accessible. Custom views require special handling to ensure they work properly with screen readers and other accessibility services.</string>
+    <string name="custom_view_default_content_description">Blue circle button</string>
+    <string name="custom_view_clicked">Custom view clicked!</string>
+    <string name="click">CLICK</string>
+
 </resources>

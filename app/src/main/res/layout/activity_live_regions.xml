@@ -60,6 +60,7 @@
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:visibility="invisible"
+                android:accessibilityLiveRegion="assertive"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/actionButton"

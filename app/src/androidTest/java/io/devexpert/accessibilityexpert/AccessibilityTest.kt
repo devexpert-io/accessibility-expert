@@ -1,6 +1,7 @@
 package io.devexpert.accessibilityexpert
 
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.accessibility.AccessibilityChecks
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
@@ -17,6 +18,10 @@ class AccessibilityTest {
 
     @get:Rule
     val activityRule = ActivityScenarioRule(ContentDescriptionActivity::class.java)
+
+    init {
+        AccessibilityChecks.enable()
+    }
 
     @Test
     fun testContentDescriptions() {

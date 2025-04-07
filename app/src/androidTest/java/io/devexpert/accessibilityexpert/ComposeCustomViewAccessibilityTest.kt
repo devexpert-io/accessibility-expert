@@ -1,7 +1,14 @@
 package io.devexpert.accessibilityexpert
 
 import android.content.Context
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.SemanticsProperties
+import androidx.compose.ui.semantics.getOrNull
+import androidx.compose.ui.test.SemanticsMatcher
+import androidx.compose.ui.test.assert
+import androidx.compose.ui.test.assertHasClickAction
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.hasRequestFocusAction
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.test.core.app.ApplicationProvider
@@ -31,6 +38,13 @@ class ComposeCustomViewAccessibilityTest {
         composeTestRule
             .onNodeWithText(context.getString(R.string.click))
             .assertIsDisplayed()
+            .assertHasClickAction()
+            .assert(hasRequestFocusAction())
+            .assert(
+                SemanticsMatcher("has correct role") {
+                    it.config.getOrNull(SemanticsProperties.Role) == Role.Button
+                },
+            )
     }
 
 } 

@@ -1,8 +1,8 @@
 package io.devexpert.accessibilityexpert
 
+import android.view.accessibility.AccessibilityNodeInfo
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.accessibility.AccessibilityChecks
-import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
@@ -26,7 +26,14 @@ class AccessibilityTest {
     @Test
     fun testContentDescriptions() {
         onView(withId(R.id.btn_home))
-            .perform(click()) // AccessibilityChecks only run in ViewAction functions, like `click()`
             .check(matches(isDisplayed()))
+            .check { view, _ ->
+                val nodeInfo = AccessibilityNodeInfo()
+                view.onInitializeAccessibilityNodeInfo(nodeInfo)
+                assert(nodeInfo.contentDescription != null) {
+                    "Home button must have a content description"
+                }
+            }
+
     }
 } 

@@ -48,6 +48,7 @@
                     android:layout_height="60dp"
                     android:src="@drawable/ic_home"
                     android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/cd_home_button"
                     android:layout_margin="16dp" />
 
                 <ImageButton
